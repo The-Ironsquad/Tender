@@ -1,37 +1,28 @@
+# Tender App
 
-# React + TypeScript + Vite
+<!--- put the new Tender Logo --->
+![Tender Logo](link_to_logo.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Never know what to cook? The Tender App can help you pick something to eat in a fast and fun way. All you have to do is set your requirements such as time and ingredients, and then just swipe the many suggestions the app will give you. Once you've selected a few options, the app will help pick your favorite from the ones you selected. You will have your meal set up before you realize it.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Usage](#usage)
+- [Contribution Guidelines](#contribution-guidelines)
+- [License](#license)
+- [Contact](#contact)
 
-## Expanding the ESLint configuration
+## Usage
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To use the Tender App, simply visit the [Tender App Website](https://tender-food-app.netlify.app/). It's in beta version and no installation is required.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 ## Contributor Code of Conduct
 
 See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 This code of conduct applies to all of the projects under the [The Ironsquad](https://github.com/The-Ironsquad) Organization.
 
+<!--- implement contributing guidelines --->
 See the [contributing guidelines](CONTRIBUTING.md) for technical details of contributing to this Project.
 
 ## License
@@ -39,3 +30,7 @@ See the [contributing guidelines](CONTRIBUTING.md) for technical details of cont
 GNU General Public License v3.0 or later
 
 See [COPYING](COPYING) to see the full text.
+
+## Contact
+
+For additional information or support, please contact The Ironsquad team at the.ironsquad.developers@gmail.com.
