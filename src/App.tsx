@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
+import Home from './pages/Home';
 import './App.css';
 
 import { AnimatePresence } from 'framer-motion';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
 
 export default function App() {
   const [showNav, setShowNav] = useState(true);
@@ -12,8 +16,13 @@ export default function App() {
       <AnimatePresence>
         {showNav && <Navbar onClose={setShowNav} />}
       </AnimatePresence>
-      <h1 onClick={() => setShowNav(true)}>Tender</h1>
-      <h2>Your next recipe is just a moment away!</h2>
+      <FontAwesomeIcon
+        icon={faBars}
+        size="2x"
+        className="menu-icon"
+        onClick={() => setShowNav(true)}
+      />
+      <Home />
     </>
   );
 }

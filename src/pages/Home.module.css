@@ -1,0 +1,15 @@
+
+
+.title {
+  margin-bottom: 50px;
+}
+
+.start-button {
+  color: var(--light);
+  background-color: var(--secondary-color);
+  font-size: 1rem;
+  margin: 50px auto;
+  padding: 10px 40px 7px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 10px;
+}
