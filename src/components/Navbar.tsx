@@ -5,9 +5,10 @@ import { motion } from 'framer-motion';
 
 type PropsType = {
   onClose: (condition: boolean) => void;
+  onSelect: (page: string) => void;
 };
 
-const Navbar: FC<PropsType> = ({ onClose }) => {
+const Navbar: FC<PropsType> = ({ onClose, onSelect }) => {
   const closeNavHandler = () => {
     onClose(false);
   };
@@ -21,10 +22,10 @@ const Navbar: FC<PropsType> = ({ onClose }) => {
         exit={{ opacity: 0, x: -150 }}
       >
         <ul className={styles.list}>
-          <li>Home</li>
-          <li>Select</li>
-          <li>Refine</li>
-          <li>Cook</li>
+          <li onClick={() => onSelect('Home')}>Home</li>
+          <li onClick={() => onSelect('SelectPage')}>Select</li>
+          <li onClick={() => onSelect('RefinePage')}>Refine</li>
+          <li onClick={() => onSelect('CookPage')}>Cook</li>
         </ul>
       </motion.nav>
       <div className={styles.modal} onClick={closeNavHandler}></div>
