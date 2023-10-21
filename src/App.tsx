@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import SelectPage from './pages/Select';
+import HomePage from './pages/HomePage';
+import SelectPage from './pages/SelectPage';
 
 import './App.css';
 
@@ -24,7 +24,11 @@ export default function App() {
     <>
       <AnimatePresence>
         {showNav && (
-          <Navbar onClose={setShowNav} onSelect={pageRoutingHandler} />
+          <Navbar
+            selected={route}
+            onClose={setShowNav}
+            onSelect={pageRoutingHandler}
+          />
         )}
       </AnimatePresence>
       <FontAwesomeIcon
@@ -33,7 +37,7 @@ export default function App() {
         className="menu-icon"
         onClick={() => setShowNav(true)}
       />
-      {route === 'Home' && <Home onSelect={pageRoutingHandler} />}
+      {route === 'HomePage' && <HomePage onSelect={pageRoutingHandler} />}
       {route === 'SelectPage' && <SelectPage />}
     </>
   );

@@ -4,11 +4,12 @@ import styles from './Navbar.module.css';
 import { motion } from 'framer-motion';
 
 type PropsType = {
+  selected: string;
   onClose: (condition: boolean) => void;
   onSelect: (page: string) => void;
 };
 
-const Navbar: FC<PropsType> = ({ onClose, onSelect }) => {
+const Navbar: FC<PropsType> = ({ selected, onClose, onSelect }) => {
   const closeNavHandler = () => {
     onClose(false);
   };
@@ -22,10 +23,30 @@ const Navbar: FC<PropsType> = ({ onClose, onSelect }) => {
         exit={{ opacity: 0, x: -150 }}
       >
         <ul className={styles.list}>
-          <li onClick={() => onSelect('Home')}>Home</li>
-          <li onClick={() => onSelect('SelectPage')}>Select</li>
-          <li onClick={() => onSelect('RefinePage')}>Refine</li>
-          <li onClick={() => onSelect('CookPage')}>Cook</li>
+          <li
+            onClick={() => onSelect('HomePage')}
+            className={selected === 'HomePage' ? styles.selected : ''}
+          >
+            Home
+          </li>
+          <li
+            onClick={() => onSelect('SelectPage')}
+            className={selected === 'SelectPage' ? styles.selected : ''}
+          >
+            Select
+          </li>
+          <li
+            onClick={() => onSelect('RefinePage')}
+            className={selected === 'RefinePage' ? styles.selected : ''}
+          >
+            Refine
+          </li>
+          <li
+            onClick={() => onSelect('CookPage')}
+            className={selected === 'CookPage' ? styles.selected : ''}
+          >
+            Cook
+          </li>
         </ul>
       </motion.nav>
       <div className={styles.modal} onClick={closeNavHandler}></div>

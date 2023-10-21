@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import styles from './Home.module.css';
+import styles from './HomePage.module.css';
 
 type PropsType = {
   onSelect: (page: string) => void;
 };
 
-const Home: FC<PropsType> = ({ onSelect }) => {
+const HomePage: FC<PropsType> = ({ onSelect }) => {
   return (
     <>
       <h1 className={styles.title}>Tender</h1>
@@ -20,4 +20,4 @@ const Home: FC<PropsType> = ({ onSelect }) => {
   );
 };
 
-export default Home;
+export default HomePage;
