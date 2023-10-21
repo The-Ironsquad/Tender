@@ -1,12 +1,11 @@
 class Recipe {
   title: string;
-  ingredients: {
-    [key: string]: string;
-  };
+  ingredients: Record<string, string>;
   directions: string[];
   servings: number;
   preparationTime: number;
   cookingTime: number;
+  totalTime: number;
 
   constructor(
     title: string,
@@ -22,6 +21,7 @@ class Recipe {
     this.servings = servings;
     this.preparationTime = preparationTime;
     this.cookingTime = cookingTime;
+    this.totalTime = preparationTime + cookingTime;
   }
 }
 
