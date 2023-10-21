@@ -12,13 +12,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
 
 export default function App() {
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
   const [route, setRoute] = useState('Home');
+
+  const pageRoutingHandler = (page: string) => {
+    setRoute(page);
+    setShowNav(false);
+  };
 
   return (
     <>
       <AnimatePresence>
-        {showNav && <Navbar onClose={setShowNav} onSelect={setRoute} />}
+        {showNav && (
+          <Navbar onClose={setShowNav} onSelect={pageRoutingHandler} />
+        )}
       </AnimatePresence>
       <FontAwesomeIcon
         icon={faBars}
