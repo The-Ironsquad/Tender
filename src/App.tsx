@@ -33,7 +33,7 @@ export default function App() {
         className="menu-icon"
         onClick={() => setShowNav(true)}
       />
-      {route === 'Home' && <Home />}
+      {route === 'Home' && <Home onSelect={pageRoutingHandler} />}
       {route === 'SelectPage' && <SelectPage />}
     </>
   );
