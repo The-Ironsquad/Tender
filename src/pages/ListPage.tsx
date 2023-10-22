@@ -10,9 +10,11 @@ import {
 
 type PropsType = {
   selectedList: string[][];
+  onRemove: (id: string) => void;
+  onSelect: (id: string) => void;
 };
 
-const ListPage: FC<PropsType> = ({ selectedList }) => {
+const ListPage: FC<PropsType> = ({ selectedList, onRemove, onSelect }) => {
   return (
     <div className={styles['list-page']}>
       <h1>Your List</h1>
@@ -26,11 +28,13 @@ const ListPage: FC<PropsType> = ({ selectedList }) => {
                   icon={faCircleXmark}
                   style={{ color: 'red' }}
                   size="lg"
+                  onClick={onRemove.bind(null, id)}
                 />
                 <FontAwesomeIcon
                   icon={faCircleCheck}
                   style={{ color: 'green' }}
                   size="lg"
+                  onClick={onSelect.bind(null, id)}
                 />
               </div>
             </li>
