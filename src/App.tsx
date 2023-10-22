@@ -13,7 +13,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
 
 export default function App() {
   const [showNav, setShowNav] = useState(false);
-  const [route, setRoute] = useState('Home');
+  const [route, setRoute] = useState('HomePage');
 
   const pageRoutingHandler = (page: string) => {
     setRoute(page);

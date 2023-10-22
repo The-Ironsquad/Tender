@@ -19,7 +19,7 @@
 
 .select-page h3 {
   flex-grow: 1;
-  margin: 5px 10%;
+  margin: 5px auto;
   display: flex;
   align-items: center;
 }

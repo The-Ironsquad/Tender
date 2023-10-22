@@ -1,5 +1,6 @@
 class Recipe {
   title: string;
+  imgSrc: string;
   ingredients: Record<string, string>;
   directions: string[];
   servings: number;
@@ -9,6 +10,7 @@ class Recipe {
 
   constructor(
     title: string,
+    imgSrc: string,
     ingredients: Record<string, string>,
     directions: string[],
     servings: number,
@@ -16,6 +18,7 @@ class Recipe {
     cookingTime: number
   ) {
     this.title = title;
+    this.imgSrc = imgSrc;
     this.ingredients = ingredients;
     this.directions = directions;
     this.servings = servings;
