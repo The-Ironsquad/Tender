@@ -1,4 +1,5 @@
 class Recipe {
+  id: string;
   title: string;
   imgSrc: string;
   ingredients: Record<string, string>;
@@ -9,6 +10,7 @@ class Recipe {
   totalTime: number;
 
   constructor(
+    id: string,
     title: string,
     imgSrc: string,
     ingredients: Record<string, string>,
@@ -17,6 +19,7 @@ class Recipe {
     preparationTime: number,
     cookingTime: number
   ) {
+    this.id = id;
     this.title = title;
     this.imgSrc = imgSrc;
     this.ingredients = ingredients;
