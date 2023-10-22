@@ -10,14 +10,26 @@ import { AnimatePresence } from 'framer-motion';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
+import ListPage from './pages/ListPage';
 
 export default function App() {
   const [showNav, setShowNav] = useState(false);
   const [route, setRoute] = useState('HomePage');
 
+  const [acceptedList, setAcceptedList] = useState<string[][]>([]);
+  const [rejectedList, setRejectedList] = useState<string[]>([]);
+
   const pageRoutingHandler = (page: string) => {
     setRoute(page);
     setShowNav(false);
+  };
+
+  const acceptRecipeHandler = (id: string, title: string) => {
+    setAcceptedList((previousState) => [...previousState, [id, title]]);
+  };
+
+  const rejectRecipeHandler = (id: string) => {
+    setRejectedList((previousState) => [...previousState, id]);
   };
 
   return (
@@ -38,7 +50,14 @@ export default function App() {
         onClick={() => setShowNav(true)}
       />
       {route === 'HomePage' && <HomePage onSelect={pageRoutingHandler} />}
-      {route === 'SelectPage' && <SelectPage />}
+      {route === 'SelectPage' && (
+        <SelectPage
+          rejectedList={rejectedList}
+          onReject={rejectRecipeHandler}
+          onAccept={acceptRecipeHandler}
+        />
+      )}
+      {route === 'ListPage' && <ListPage selectedList={acceptedList} />}
     </>
   );
 }
