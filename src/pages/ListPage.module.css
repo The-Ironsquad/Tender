@@ -1,0 +1,26 @@
+.list-page h1 {
+  margin: 15px;
+}
+
+.list-page ul {
+  width: 90vw;
+  margin-top: 40px;
+  overflow: scroll;
+}
+
+.list-page li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  text-align: left;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

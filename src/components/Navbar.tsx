@@ -36,6 +36,12 @@ const Navbar: FC<PropsType> = ({ selected, onClose, onSelect }) => {
             Select
           </li>
           <li
+            onClick={() => onSelect('ListPage')}
+            className={selected === 'ListPage' ? styles.selected : ''}
+          >
+            Your List
+          </li>
+          <li
             onClick={() => onSelect('RefinePage')}
             className={selected === 'RefinePage' ? styles.selected : ''}
           >
