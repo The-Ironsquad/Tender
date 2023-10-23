@@ -1,4 +1,5 @@
 .select-page {
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 }
@@ -30,4 +31,14 @@
   gap: 30vw;
   flex-grow: 0.5;
   margin: 5px 0 15px;
+}
+
+.select-page button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: var(--light);
+  font-size: inherit;
+  padding: 8px 40px;
+  margin-bottom: 15px;
 }
