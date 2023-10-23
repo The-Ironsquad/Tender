@@ -24,7 +24,7 @@ const ListPage: FC<PropsType> = ({
   return (
     <div className={styles['list-page']}>
       <h1>Your List</h1>
-      <ul>
+      <ul className={styles.list}>
         {selectedList.map(([id, title]) => {
           return (
             <li key={id}>

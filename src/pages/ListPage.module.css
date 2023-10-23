@@ -1,10 +1,13 @@
-.list-page h1 {
-  margin: 15px;
+.list-page {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
 }
 
 .list-page ul {
   width: 90vw;
-  margin: 40px auto 15px;
+  margin: 15px auto;
   overflow: scroll;
 }
 
