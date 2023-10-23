@@ -12,9 +12,15 @@ type PropsType = {
   selectedList: string[][];
   onRemove: (id: string) => void;
   onSelect: (id: string) => void;
+  onAdvance: (page: string) => void;
 };
 
-const ListPage: FC<PropsType> = ({ selectedList, onRemove, onSelect }) => {
+const ListPage: FC<PropsType> = ({
+  selectedList,
+  onRemove,
+  onSelect,
+  onAdvance,
+}) => {
   return (
     <div className={styles['list-page']}>
       <h1>Your List</h1>
@@ -41,6 +47,15 @@ const ListPage: FC<PropsType> = ({ selectedList, onRemove, onSelect }) => {
           );
         })}
       </ul>
+      <h3>Still undecided?</h3>
+      <div className={styles.navigate}>
+        <button onClick={() => onAdvance('RefinePage')}>
+          Refine your selection!
+        </button>
+        <button onClick={() => onAdvance('SelectPage')}>
+          Back to selection!
+        </button>
+      </div>
     </div>
   );
 };

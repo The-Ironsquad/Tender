@@ -17,9 +17,15 @@ type PropsType = {
   rejectedList: string[];
   onAccept: (id: string, title: string) => void;
   onReject: (id: string) => void;
+  onAdvance: (page: string) => void;
 };
 
-const SelectPage: FC<PropsType> = ({ onAccept, onReject, rejectedList }) => {
+const SelectPage: FC<PropsType> = ({
+  onAccept,
+  onReject,
+  rejectedList,
+  onAdvance,
+}) => {
   const [recipe, setRecipe] = useState<Recipe>(EMPTY_RECIPE);
 
   useEffect(() => {
@@ -55,6 +61,13 @@ const SelectPage: FC<PropsType> = ({ onAccept, onReject, rejectedList }) => {
           onClick={acceptHandler}
         />
       </div>
+      <button
+        onClick={() => {
+          onAdvance('ListPage');
+        }}
+      >
+        See Your Selection
+      </button>
     </div>
   );
 };

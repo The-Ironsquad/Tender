@@ -12,6 +12,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons/faBars';
+import RefinePage from './pages/RefinePage';
 
 export default function App() {
   const [showNav, setShowNav] = useState(false);
@@ -69,11 +70,20 @@ export default function App() {
           rejectedList={rejectedList}
           onReject={rejectRecipeHandler}
           onAccept={acceptRecipeHandler}
+          onAdvance={pageRoutingHandler}
         />
       )}
       {route === 'ListPage' && (
         <ListPage
           selectedList={acceptedList}
+          onRemove={removeRecipeHandler}
+          onSelect={selectRecipeHandler}
+          onAdvance={pageRoutingHandler}
+        />
+      )}
+      {route === 'RefinePage' && (
+        <RefinePage
+          recipesList={acceptedList}
           onRemove={removeRecipeHandler}
           onSelect={selectRecipeHandler}
         />
