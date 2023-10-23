@@ -1,17 +1,14 @@
 import axios from 'axios';
 import Recipe from '../models/recipe';
 
-const fetchRandomRecipe = async (
+const fetchRecipeById = async (
   recipeSave: (recipe: Recipe) => void,
-  avoidList: string[]
+  id: string
 ) => {
-  let meal: Record<string, string>;
-  do {
-    const { data } = await axios.get(
-      'https://www.themealdb.com/api/json/v1/1/random.php'
-    );
-    [meal] = data.meals;
-  } while (avoidList.includes(meal.idMeal));
+  const { data } = await axios.get(
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+  );
+  const [meal] = data.meals;
 
   const ingredients = Object.keys(meal)
     .filter((key) => key.match('strIngredient*') && meal[key] !== '')
@@ -38,4 +35,4 @@ const fetchRandomRecipe = async (
   recipeSave(recipe);
 };
 
-export default fetchRandomRecipe;
+export default fetchRecipeById;
