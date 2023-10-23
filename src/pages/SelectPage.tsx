@@ -11,7 +11,7 @@ import {
 
 import styles from './SelectPage.module.css';
 
-const EMPTY_RECIPE = new Recipe('', '', '', {}, [''], 0, 0, 0);
+const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
 
 type PropsType = {
   rejectedList: string[];
