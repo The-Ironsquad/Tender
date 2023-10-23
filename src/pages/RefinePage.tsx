@@ -17,6 +17,11 @@ const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect }) => {
   const [recipeB, setRecipeB] = useState<Recipe>(EMPTY_RECIPE);
 
   useEffect(() => {
+    if (recipesList.length < 2) onSelect(recipesList[0][0]);
+  }, [onSelect, recipesList]);
+
+  useEffect(() => {
+    if (recipesList.length < 2) return;
     let idxA: number;
     let idxB: number;
     if (recipeA.id === '' && recipeB.id === '') {
@@ -45,12 +50,26 @@ const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect }) => {
     <div className={styles['refine-page']}>
       <h1>Death Match</h1>
       <div className={styles['recipe-card']}>
-        <img src={recipeA.imgSrc} alt={recipeA.title} />
+        <img
+          src={recipeA.imgSrc}
+          alt={recipeA.title}
+          onClick={() => {
+            onRemove(recipeB.id);
+            setRecipeB(EMPTY_RECIPE);
+          }}
+        />
         <h3>{recipeA.title}</h3>
       </div>
       <h2>Vs</h2>
       <div className={styles['recipe-card']}>
-        <img src={recipeB.imgSrc} alt={recipeB.title} />
+        <img
+          src={recipeB.imgSrc}
+          alt={recipeB.title}
+          onClick={() => {
+            onRemove(recipeA.id);
+            setRecipeA(EMPTY_RECIPE);
+          }}
+        />
         <h3>{recipeB.title}</h3>
       </div>
     </div>
