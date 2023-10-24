@@ -34,6 +34,7 @@ const ListPage: FC<PropsType> = ({
       </div>
     );
   }
+
   return (
     <div className={styles['list-page']}>
       <h1>Your List</h1>
