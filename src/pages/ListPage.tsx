@@ -21,6 +21,20 @@ const ListPage: FC<PropsType> = ({
   onSelect,
   onAdvance,
 }) => {
+  if (selectedList.length === 0) {
+    return (
+      <div className={styles['list-page']}>
+        <h1>Your List</h1>
+        <div className={styles.empty}>
+          <h3>No Recipes Selected!</h3>
+          <button onClick={() => onAdvance('SelectPage')}>
+            Go to selection!
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles['list-page']}>
       <h1>Your List</h1>

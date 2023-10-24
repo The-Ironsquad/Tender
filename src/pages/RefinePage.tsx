@@ -8,16 +8,18 @@ type PropsType = {
   recipesList: string[][];
   onRemove: (removeId: string) => void;
   onSelect: (selectedId: string) => void;
+  onAdvance: (page: string) => void;
 };
 
 const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
 
-const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect }) => {
+const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect, onAdvance }) => {
   const [recipeA, setRecipeA] = useState<Recipe>(EMPTY_RECIPE);
   const [recipeB, setRecipeB] = useState<Recipe>(EMPTY_RECIPE);
 
   useEffect(() => {
-    if (recipesList.length < 2) onSelect(recipesList[0][0]);
+    if (recipesList.length === 0) return;
+    if (recipesList.length === 1) onSelect(recipesList[0][0]);
   }, [onSelect, recipesList]);
 
   useEffect(() => {
@@ -45,6 +47,20 @@ const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect }) => {
       fetchRecipeById(setRecipeA, recipesList[idxA][0]);
     }
   }, [recipeA, recipeB, recipesList]);
+
+  if (recipesList.length === 0) {
+    return (
+      <div className={styles['refine-page']}>
+        <h1>Death Match</h1>
+        <div className={styles.empty}>
+          <h3>No Recipes Selected!</h3>
+          <button onClick={() => onAdvance('SelectPage')}>
+            Go to selection!
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles['refine-page']}>

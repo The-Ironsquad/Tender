@@ -86,9 +86,12 @@ export default function App() {
           recipesList={acceptedList}
           onRemove={removeRecipeHandler}
           onSelect={selectRecipeHandler}
+          onAdvance={pageRoutingHandler}
         />
       )}
-      {route === 'CookPage' && <CookPage selectedId={selected} />}
+      {route === 'CookPage' && (
+        <CookPage selectedId={selected} onAdvance={pageRoutingHandler} />
+      )}
     </>
   );
 }
