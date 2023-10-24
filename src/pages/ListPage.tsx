@@ -47,13 +47,13 @@ const ListPage: FC<PropsType> = ({
                 <FontAwesomeIcon
                   icon={faCircleXmark}
                   style={{ color: 'red' }}
-                  size="lg"
+                  size="xl"
                   onClick={onRemove.bind(null, id)}
                 />
                 <FontAwesomeIcon
                   icon={faCircleCheck}
                   style={{ color: 'green' }}
-                  size="lg"
+                  size="xl"
                   onClick={onSelect.bind(null, id)}
                 />
               </div>
