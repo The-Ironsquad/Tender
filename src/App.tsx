@@ -89,7 +89,9 @@ export default function App() {
           onAdvance={pageRoutingHandler}
         />
       )}
-      {route === 'CookPage' && <CookPage selectedId={selected} />}
+      {route === 'CookPage' && (
+        <CookPage selectedId={selected} onAdvance={pageRoutingHandler} />
+      )}
     </>
   );
 }

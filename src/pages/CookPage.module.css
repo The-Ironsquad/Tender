@@ -1,5 +1,8 @@
 .cook-page {
   margin: 15px 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 .cook-page img {
@@ -43,4 +46,26 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.cook-page button {
+  flex: 1;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: var(--light);
+  font-size: inherit;
+  padding: 10px 20px;
+  margin: 10px;
+}
+
+.empty {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cook-page .empty > * {
+  flex: 0
 }

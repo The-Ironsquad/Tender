@@ -7,16 +7,35 @@ import fetchRecipeById from '../utils/fetchRecipebyId';
 
 type PropsType = {
   selectedId: string;
+  onAdvance: (page: string) => void;
 };
 
 const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
 
-const CookPage: FC<PropsType> = ({ selectedId }) => {
+const CookPage: FC<PropsType> = ({ selectedId, onAdvance }) => {
   const [recipe, setRecipe] = useState<Recipe>(EMPTY_RECIPE);
 
   useEffect(() => {
-    fetchRecipeById(setRecipe, selectedId);
+    if (selectedId) fetchRecipeById(setRecipe, selectedId);
   }, [selectedId]);
+
+  if (recipe.id === '') {
+    return (
+      <div className={styles['cook-page']}>
+        <h1>Time to Cook</h1>
+        <div className={styles.empty}>
+          <h3>No Recipes Selected!</h3>
+          <button onClick={() => onAdvance('SelectPage')}>
+            Go to selection!
+          </button>
+          <button onClick={() => onAdvance('ListPage')}>
+            Go to your List!
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles['cook-page']}>
       <h1>Time to Cook</h1>
@@ -33,8 +52,8 @@ const CookPage: FC<PropsType> = ({ selectedId }) => {
       </ul>
       <ul className={styles.instructions}>
         <h3>Cooking Instructions</h3>
-        {recipe.directions.map((step) => (
-          <p>{step}</p>
+        {recipe.directions.map((step, idx) => (
+          <p key={idx}>{step}</p>
         ))}
       </ul>
     </div>
