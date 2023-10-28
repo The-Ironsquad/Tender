@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleCheck,
   faCircleXmark,
-} from '@fortawesome/free-regular-svg-icons';
+} from '@fortawesome/free-solid-svg-icons';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -82,13 +82,13 @@ const SelectPage: FC<PropsType> = ({
       <div className={styles.action}>
         <FontAwesomeIcon
           icon={faCircleXmark}
-          size="3x"
+          size="4x"
           style={{ color: 'red' }}
           onClick={rejectHandler}
         />
         <FontAwesomeIcon
           icon={faCircleCheck}
-          size="3x"
+          size="4x"
           style={{ color: 'green' }}
           onClick={acceptHandler}
         />
