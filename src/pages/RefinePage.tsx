@@ -4,6 +4,8 @@ import styles from './RefinePage.module.css';
 import Recipe from '../models/recipe';
 import fetchRecipeById from '../utils/fetchRecipebyId';
 
+import { motion, AnimatePresence } from 'framer-motion';
+
 type PropsType = {
   recipesList: string[][];
   onRemove: (removeId: string) => void;
@@ -13,7 +15,12 @@ type PropsType = {
 
 const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
 
-const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect, onAdvance }) => {
+const RefinePage: FC<PropsType> = ({
+  recipesList,
+  onRemove,
+  onSelect,
+  onAdvance,
+}) => {
   const [recipeA, setRecipeA] = useState<Recipe>(EMPTY_RECIPE);
   const [recipeB, setRecipeB] = useState<Recipe>(EMPTY_RECIPE);
 
@@ -26,26 +33,28 @@ const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect, onAdvance 
     if (recipesList.length < 2) return;
     let idxA: number;
     let idxB: number;
-    if (recipeA.id === '' && recipeB.id === '') {
-      idxA = Math.floor(Math.random() * recipesList.length);
-      do {
-        idxB = Math.floor(Math.random() * recipesList.length);
-      } while (idxA === idxB);
-      fetchRecipeById(setRecipeA, recipesList[idxA][0]);
-      fetchRecipeById(setRecipeB, recipesList[idxB][0]);
-    } else if (recipeB.id === '') {
-      idxA = recipesList.findIndex((recipe) => recipe[0] === recipeA.id);
-      do {
-        idxB = Math.floor(Math.random() * recipesList.length);
-      } while (idxA === idxB);
-      fetchRecipeById(setRecipeB, recipesList[idxB][0]);
-    } else if (recipeA.id === '') {
-      idxB = recipesList.findIndex((recipe) => recipe[0] === recipeB.id);
-      do {
+    setTimeout(() => {
+      if (recipeA.id === '' && recipeB.id === '') {
         idxA = Math.floor(Math.random() * recipesList.length);
-      } while (idxA === idxB);
-      fetchRecipeById(setRecipeA, recipesList[idxA][0]);
-    }
+        do {
+          idxB = Math.floor(Math.random() * recipesList.length);
+        } while (idxA === idxB);
+        fetchRecipeById(setRecipeA, recipesList[idxA][0]);
+        fetchRecipeById(setRecipeB, recipesList[idxB][0]);
+      } else if (recipeB.id === '') {
+        idxA = recipesList.findIndex((recipe) => recipe[0] === recipeA.id);
+        do {
+          idxB = Math.floor(Math.random() * recipesList.length);
+        } while (idxA === idxB);
+        fetchRecipeById(setRecipeB, recipesList[idxB][0]);
+      } else if (recipeA.id === '') {
+        idxB = recipesList.findIndex((recipe) => recipe[0] === recipeB.id);
+        do {
+          idxA = Math.floor(Math.random() * recipesList.length);
+        } while (idxA === idxB);
+        fetchRecipeById(setRecipeA, recipesList[idxA][0]);
+      }
+    }, 250);
   }, [recipeA, recipeB, recipesList]);
 
   if (recipesList.length === 0) {
@@ -66,26 +75,42 @@ const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect, onAdvance 
     <div className={styles['refine-page']}>
       <h1>Death Match</h1>
       <div className={styles['recipe-card']}>
-        <img
-          src={recipeA.imgSrc}
-          alt={recipeA.title}
-          onClick={() => {
-            onRemove(recipeB.id);
-            setRecipeB(EMPTY_RECIPE);
-          }}
-        />
+        <AnimatePresence>
+          {recipeA.imgSrc !== '' && (
+            <motion.img
+              src={recipeA.imgSrc}
+              alt={recipeA.title}
+              onClick={() => {
+                onRemove(recipeB.id);
+                setRecipeB(EMPTY_RECIPE);
+              }}
+              initial={{ x: -500 }}
+              animate={{ x: 0 }}
+              exit={{ x: 500 }}
+              transition={{ duration: 0.2 }}
+            />
+          )}
+        </AnimatePresence>
         <h3>{recipeA.title}</h3>
       </div>
       <h2>Vs</h2>
       <div className={styles['recipe-card']}>
-        <img
-          src={recipeB.imgSrc}
-          alt={recipeB.title}
-          onClick={() => {
-            onRemove(recipeA.id);
-            setRecipeA(EMPTY_RECIPE);
-          }}
-        />
+        <AnimatePresence>
+          {recipeB.imgSrc !== '' && (
+            <motion.img
+              src={recipeB.imgSrc}
+              alt={recipeB.title}
+              onClick={() => {
+                onRemove(recipeA.id);
+                setRecipeA(EMPTY_RECIPE);
+              }}
+              initial={{ x: -500 }}
+              animate={{ x: 0 }}
+              exit={{ x: 500 }}
+              transition={{ duration: 0.2 }}
+            />
+          )}
+        </AnimatePresence>
         <h3>{recipeB.title}</h3>
       </div>
     </div>
