@@ -10,12 +10,17 @@
   flex-grow: 0;
 }
 
-.select-page img {
+.img-container {
   height: 350px;
+  margin: 5px auto 20px;
+  flex-grow: 2;
+  align-self: stretch;
+}
+
+.select-page img {
+  height: 100%;
   width: 90vw;
   object-fit: cover;
-  margin: 5px auto;
-  flex-grow: 2;
   box-shadow: 0 5px 10px 5px var(--light-gray);
 }
 
