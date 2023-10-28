@@ -7,6 +7,7 @@ import {
   faCircleCheck,
   faCircleXmark,
 } from '@fortawesome/free-regular-svg-icons';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type PropsType = {
   selectedList: string[][];
@@ -39,27 +40,34 @@ const ListPage: FC<PropsType> = ({
     <div className={styles['list-page']}>
       <h1>Your List</h1>
       <ul className={styles.list}>
-        {selectedList.map(([id, title]) => {
-          return (
-            <li key={id}>
-              <p>{title}</p>
-              <div className={styles.action}>
-                <FontAwesomeIcon
-                  icon={faCircleXmark}
-                  style={{ color: 'red' }}
-                  size="xl"
-                  onClick={onRemove.bind(null, id)}
-                />
-                <FontAwesomeIcon
-                  icon={faCircleCheck}
-                  style={{ color: 'green' }}
-                  size="xl"
-                  onClick={onSelect.bind(null, id)}
-                />
-              </div>
-            </li>
-          );
-        })}
+        <AnimatePresence>
+          {selectedList.map(([id, title]) => {
+            return (
+              <motion.li
+                key={id}
+                animate={{ x: 0 }}
+                exit={{ x: -500 }}
+                transition={{ duration: 0.2 }}
+              >
+                <p>{title}</p>
+                <div className={styles.action}>
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    style={{ color: 'red' }}
+                    size="xl"
+                    onClick={onRemove.bind(null, id)}
+                  />
+                  <FontAwesomeIcon
+                    icon={faCircleCheck}
+                    style={{ color: 'green' }}
+                    size="xl"
+                    onClick={onSelect.bind(null, id)}
+                  />
+                </div>
+              </motion.li>
+            );
+          })}
+        </AnimatePresence>
       </ul>
       <h3>Still undecided?</h3>
       <div className={styles.navigate}>
