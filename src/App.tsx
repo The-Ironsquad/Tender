@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import PageLayout from './pages/PageLayout';
@@ -25,28 +24,5 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  const [acceptedList, setAcceptedList] = useState<string[][]>([]);
-  const [rejectedList, setRejectedList] = useState<string[]>([]);
-  const [selected, setSelected] = useState<string>('');
-
-  const acceptRecipeHandler = (id: string, title: string) => {
-    setAcceptedList((previousState) => [...previousState, [id, title]]);
-  };
-
-  const rejectRecipeHandler = (id: string) => {
-    setRejectedList((previousState) => [...previousState, id]);
-  };
-
-  const removeRecipeHandler = (removeId: string) => {
-    setAcceptedList((preciousState) =>
-      preciousState.filter(([id]) => id !== removeId)
-    );
-  };
-
-  const selectRecipeHandler = (selectedId: string) => {
-    setSelected(selectedId);
-    setRoute('CookPage');
-  };
-
   return <RouterProvider router={router} />;
 }

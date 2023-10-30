@@ -1,5 +1,7 @@
-import { FC } from 'react';
 import { Link } from 'react-router-dom';
+
+import { listActions } from '../store';
+import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
 
 import styles from './ListPage.module.css';
 
@@ -10,13 +12,10 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
-type PropsType = {
-  selectedList: string[][];
-  onRemove: (id: string) => void;
-  onSelect: (id: string) => void;
-};
+const ListPage = () => {
+  const dispatch = useAppDispatch();
+  const selectedList = useAppSelector((state) => state.acceptedList);
 
-const ListPage: FC<PropsType> = ({ selectedList, onRemove, onSelect }) => {
   if (selectedList.length === 0) {
     return (
       <div className={styles['list-page']}>
@@ -50,13 +49,13 @@ const ListPage: FC<PropsType> = ({ selectedList, onRemove, onSelect }) => {
                     icon={faCircleXmark}
                     style={{ color: 'red' }}
                     size="xl"
-                    onClick={onRemove.bind(null, id)}
+                    onClick={() => dispatch(listActions.remove(id))}
                   />
                   <FontAwesomeIcon
                     icon={faCircleCheck}
                     style={{ color: 'green' }}
                     size="xl"
-                    onClick={onSelect.bind(null, id)}
+                    onClick={() => dispatch(listActions.select(id))}
                   />
                 </div>
               </motion.li>
