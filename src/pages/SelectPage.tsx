@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Recipe from '../models/recipe';
 import fetchRandomRecipe from '../utils/fetchRandomRecipe';
@@ -19,15 +20,9 @@ type PropsType = {
   rejectedList: string[];
   onAccept: (id: string, title: string) => void;
   onReject: (id: string) => void;
-  onAdvance: (page: string) => void;
 };
 
-const SelectPage: FC<PropsType> = ({
-  onAccept,
-  onReject,
-  rejectedList,
-  onAdvance,
-}) => {
+const SelectPage: FC<PropsType> = ({ onAccept, onReject, rejectedList }) => {
   const [recipe, setRecipe] = useState<Recipe>(EMPTY_RECIPE);
   const [showRecipe, setShowRecipe] = useState(false);
   const [swipeRight, setSwipeRight] = useState(true);
@@ -93,12 +88,8 @@ const SelectPage: FC<PropsType> = ({
           onClick={acceptHandler}
         />
       </div>
-      <button
-        onClick={() => {
-          onAdvance('ListPage');
-        }}
-      >
-        See Your Selection
+      <button>
+        <Link to="/select">See Your Selection</Link>
       </button>
     </div>
   );

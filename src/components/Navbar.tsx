@@ -1,19 +1,15 @@
 import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import styles from './Navbar.module.css';
 
 import { motion } from 'framer-motion';
 
 type PropsType = {
-  selected: string;
   onClose: (condition: boolean) => void;
-  onSelect: (page: string) => void;
 };
 
-const Navbar: FC<PropsType> = ({ selected, onClose, onSelect }) => {
-  const closeNavHandler = () => {
-    onClose(false);
-  };
-
+const Navbar: FC<PropsType> = ({ onClose }) => {
   return (
     <>
       <motion.nav
@@ -23,39 +19,24 @@ const Navbar: FC<PropsType> = ({ selected, onClose, onSelect }) => {
         exit={{ opacity: 0, x: -150 }}
       >
         <ul className={styles.list}>
-          <li
-            onClick={() => onSelect('HomePage')}
-            className={selected === 'HomePage' ? styles.selected : ''}
-          >
-            Home
+          <li>
+            <NavLink to="/">Home</NavLink>
           </li>
-          <li
-            onClick={() => onSelect('SelectPage')}
-            className={selected === 'SelectPage' ? styles.selected : ''}
-          >
-            Select
+          <li>
+            <NavLink to="/select">Select</NavLink>
           </li>
-          <li
-            onClick={() => onSelect('ListPage')}
-            className={selected === 'ListPage' ? styles.selected : ''}
-          >
-            Your List
+          <li>
+            <NavLink to="/list">Your List</NavLink>
           </li>
-          <li
-            onClick={() => onSelect('RefinePage')}
-            className={selected === 'RefinePage' ? styles.selected : ''}
-          >
-            Refine
+          <li>
+            <NavLink to="/refine">Refine</NavLink>
           </li>
-          <li
-            onClick={() => onSelect('CookPage')}
-            className={selected === 'CookPage' ? styles.selected : ''}
-          >
-            Cook
+          <li>
+            <NavLink to="cook">Cook</NavLink>
           </li>
         </ul>
       </motion.nav>
-      <div className={styles.modal} onClick={closeNavHandler}></div>
+      <div className={styles.modal} onClick={onClose.bind(null, false)}></div>
     </>
   );
 };

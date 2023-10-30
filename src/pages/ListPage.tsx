@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './ListPage.module.css';
 
@@ -13,23 +14,17 @@ type PropsType = {
   selectedList: string[][];
   onRemove: (id: string) => void;
   onSelect: (id: string) => void;
-  onAdvance: (page: string) => void;
 };
 
-const ListPage: FC<PropsType> = ({
-  selectedList,
-  onRemove,
-  onSelect,
-  onAdvance,
-}) => {
+const ListPage: FC<PropsType> = ({ selectedList, onRemove, onSelect }) => {
   if (selectedList.length === 0) {
     return (
       <div className={styles['list-page']}>
         <h1>Your List</h1>
         <div className={styles.empty}>
           <h3>No Recipes Selected!</h3>
-          <button onClick={() => onAdvance('SelectPage')}>
-            Go to selection!
+          <button>
+            <Link to="/select">Go to selection!</Link>
           </button>
         </div>
       </div>
@@ -71,11 +66,11 @@ const ListPage: FC<PropsType> = ({
       </ul>
       <h3>Still undecided?</h3>
       <div className={styles.navigate}>
-        <button onClick={() => onAdvance('RefinePage')}>
-          Refine your selection!
+        <button>
+          <Link to="/refine">Refine your selection!</Link>
         </button>
-        <button onClick={() => onAdvance('SelectPage')}>
-          Back to selection!
+        <button>
+          <Link to="/select">Back to selection!</Link>
         </button>
       </div>
     </div>

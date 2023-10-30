@@ -1,20 +1,14 @@
-import { FC } from 'react';
+import { Link } from 'react-router-dom';
+
 import styles from './HomePage.module.css';
 
-type PropsType = {
-  onSelect: (page: string) => void;
-};
-
-const HomePage: FC<PropsType> = ({ onSelect }) => {
+const HomePage = () => {
   return (
     <div className={styles['home-page']}>
       <h1 className={styles.title}>Tender</h1>
       <h2>Your next recipe is just a moment away!</h2>
-      <button
-        className={styles['start-button']}
-        onClick={() => onSelect('SelectPage')}
-      >
-        Get Started!
+      <button className={styles['start-button']}>
+        <Link to="/select">Get Started!</Link>
       </button>
     </div>
   );

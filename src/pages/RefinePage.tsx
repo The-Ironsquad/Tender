@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './RefinePage.module.css';
 import Recipe from '../models/recipe';
@@ -10,17 +11,11 @@ type PropsType = {
   recipesList: string[][];
   onRemove: (removeId: string) => void;
   onSelect: (selectedId: string) => void;
-  onAdvance: (page: string) => void;
 };
 
 const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
 
-const RefinePage: FC<PropsType> = ({
-  recipesList,
-  onRemove,
-  onSelect,
-  onAdvance,
-}) => {
+const RefinePage: FC<PropsType> = ({ recipesList, onRemove, onSelect }) => {
   const [recipeA, setRecipeA] = useState<Recipe>(EMPTY_RECIPE);
   const [recipeB, setRecipeB] = useState<Recipe>(EMPTY_RECIPE);
 
@@ -63,8 +58,8 @@ const RefinePage: FC<PropsType> = ({
         <h1>Death Match</h1>
         <div className={styles.empty}>
           <h3>No Recipes Selected!</h3>
-          <button onClick={() => onAdvance('SelectPage')}>
-            Go to selection!
+          <button>
+            <Link to="/select">Go to selection!</Link>
           </button>
         </div>
       </div>
