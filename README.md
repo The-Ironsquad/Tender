@@ -18,6 +18,7 @@ To use the Tender App, simply visit the [Tender App Website](https://tender-food
 
 ## Contributor Code of Conduct and Guidelines
 
+Want to contribute to Tender?
 See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 This code of conduct applies to all of the projects under the [The Ironsquad](https://github.com/The-Ironsquad) Organization.
@@ -29,6 +30,8 @@ See the [contributing guidelines](CONTRIBUTING.md) for technical details of cont
 GNU General Public License v3.0 or later
 
 See [COPYING](COPYING) to see the full text.
+
+Tender is powered by [The Meal DB](https://themealdb.com/api.php)
 
 ## Contact
 

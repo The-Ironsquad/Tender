@@ -10,6 +10,17 @@ const HomePage = () => {
       <button className={styles['start-button']}>
         <Link to="/select">Get Started!</Link>
       </button>
+      <p>
+        Powered by{' '}
+        <a
+          href="https://themealdb.com/api.php"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          The Meal DB
+        </a>
+      </p>
     </div>
   );
 };
