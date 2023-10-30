@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { listActions } from '../store';
 import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
@@ -15,6 +15,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ListPage = () => {
   const dispatch = useAppDispatch();
   const selectedList = useAppSelector((state) => state.acceptedList);
+
+  const navigate = useNavigate();
 
   if (selectedList.length === 0) {
     return (
@@ -55,7 +57,10 @@ const ListPage = () => {
                     icon={faCircleCheck}
                     style={{ color: 'green' }}
                     size="xl"
-                    onClick={() => dispatch(listActions.select(id))}
+                    onClick={() => {
+                      dispatch(listActions.select(id));
+                      navigate('/cook');
+                    }}
                   />
                 </div>
               </motion.li>

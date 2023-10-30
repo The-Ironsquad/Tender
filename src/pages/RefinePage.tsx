@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { listActions } from '../store';
 import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
@@ -19,11 +19,15 @@ const RefinePage = () => {
   const dispatch = useAppDispatch();
   const recipesList = useAppSelector((state) => state.acceptedList);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (recipesList.length === 0) return;
-    if (recipesList.length === 1)
+    if (recipesList.length === 1) {
       dispatch(listActions.select(recipesList[0][0]));
-  }, [dispatch, recipesList]);
+      navigate('/cook');
+    }
+  }, [navigate, dispatch, recipesList]);
 
   useEffect(() => {
     if (recipesList.length < 2) return;

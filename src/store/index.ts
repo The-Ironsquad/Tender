@@ -12,6 +12,7 @@ const initialState: StateType = {
   selected: '',
 };
 
+
 const listSlice = createSlice({
   name: 'list',
   initialState,
