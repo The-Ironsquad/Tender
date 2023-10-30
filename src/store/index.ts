@@ -1,17 +1,18 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 type StateType = {
+  selectedCategories: string[];
   acceptedList: string[][];
   rejectedList: string[];
   selected: string;
 };
 
 const initialState: StateType = {
+  selectedCategories: [],
   acceptedList: [],
   rejectedList: [],
   selected: '',
 };
-
 
 const listSlice = createSlice({
   name: 'list',
@@ -31,6 +32,13 @@ const listSlice = createSlice({
     select(state, action) {
       state.selected = action.payload;
     },
+    toggleCategory(state, action) {
+      if (state.selectedCategories.includes(action.payload))
+        state.selectedCategories = state.selectedCategories.filter(
+          (category) => category !== action.payload
+        );
+      else state.selectedCategories.push(action.payload);
+    },
   },
 });
 
@@ -39,8 +47,8 @@ const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export const listActions = listSlice.actions;
-export type AppDispatch = typeof store.dispatch;
 
 export default store;

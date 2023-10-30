@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 30px;
 }
 
 .title {
@@ -17,10 +18,65 @@
   color: var(--light);
   background-color: var(--secondary-color);
   font-size: 1rem;
-  margin: 50px auto;
+  margin: 10px auto;
   padding: 10px 40px 7px;
   border: 1px solid var(--secondary-color);
   border-radius: 10px;
+}
+
+.fieldset {
+  margin: 0 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+}
+
+.fieldset div {
+  font-size: 13px;
+}
+
+.fieldset div label {
+  display: inline-block;
+  border: 2px solid var(--light-gray);
+  color: var(--dark-gray);
+  border-radius: 15px;
+  transition: all .2s;
+}
+
+.fieldset div label {
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.fieldset div label::before {
+  display: inline-block;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 12px;
+  padding: 2px 6px 2px 2px;
+  content: "\f067";
+  transition: transform .3s ease-in-out;
+}
+
+.fieldset div input[type="checkbox"]:checked + label::before {
+  content: "\f00c";
+  transform: rotate(-360deg);
+  transition: transform .3s ease-in-out;
+}
+
+.fieldset div input[type="checkbox"]:checked + label {
+  border: 2px solid var(--secondary-color);
+  background-color: var(--primary-color);
+  color: var(--light);
+  transition: all .2s;
+}
+
+.fieldset input[type="checkbox"] {
+  display: absolute;
+  position: absolute;
+  opacity: 0;
 }
 
 .home-page p {

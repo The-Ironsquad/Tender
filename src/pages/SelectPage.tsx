@@ -26,18 +26,19 @@ const SelectPage = () => {
 
   const dispatch = useAppDispatch();
   const rejectedList = useAppSelector((state) => state.rejectedList);
+  const categories = useAppSelector((state) => state.selectedCategories);
 
   useEffect(() => {
-    fetchRandomRecipe(setRecipe, rejectedList);
+    fetchRandomRecipe(setRecipe, rejectedList, categories);
     setShowRecipe(true);
-  }, [rejectedList]);
+  }, [rejectedList, categories]);
 
   const acceptHandler = () => {
     setSwipeRight(true);
     dispatch(listActions.accept([recipe.id, recipe.title]));
     setTimeout(() => {
       setShowRecipe(false);
-      fetchRandomRecipe(setRecipe, rejectedList);
+      fetchRandomRecipe(setRecipe, rejectedList, categories);
       setTimeout(() => {
         setShowRecipe(true);
       }, 250);
@@ -49,7 +50,7 @@ const SelectPage = () => {
     dispatch(listActions.reject(recipe.id));
     setTimeout(() => {
       setShowRecipe(false);
-      fetchRandomRecipe(setRecipe, rejectedList);
+      fetchRandomRecipe(setRecipe, rejectedList, categories);
       setTimeout(() => {
         setShowRecipe(true);
       }, 250);
