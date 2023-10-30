@@ -1,4 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { listActions } from '../store';
+import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
 
 import styles from './RefinePage.module.css';
 import Recipe from '../models/recipe';
@@ -6,28 +10,24 @@ import fetchRecipeById from '../utils/fetchRecipebyId';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
-type PropsType = {
-  recipesList: string[][];
-  onRemove: (removeId: string) => void;
-  onSelect: (selectedId: string) => void;
-  onAdvance: (page: string) => void;
-};
-
 const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
 
-const RefinePage: FC<PropsType> = ({
-  recipesList,
-  onRemove,
-  onSelect,
-  onAdvance,
-}) => {
+const RefinePage = () => {
   const [recipeA, setRecipeA] = useState<Recipe>(EMPTY_RECIPE);
   const [recipeB, setRecipeB] = useState<Recipe>(EMPTY_RECIPE);
 
+  const dispatch = useAppDispatch();
+  const recipesList = useAppSelector((state) => state.acceptedList);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (recipesList.length === 0) return;
-    if (recipesList.length === 1) onSelect(recipesList[0][0]);
-  }, [onSelect, recipesList]);
+    if (recipesList.length === 1) {
+      dispatch(listActions.select(recipesList[0][0]));
+      navigate('/cook');
+    }
+  }, [navigate, dispatch, recipesList]);
 
   useEffect(() => {
     if (recipesList.length < 2) return;
@@ -63,8 +63,8 @@ const RefinePage: FC<PropsType> = ({
         <h1>Death Match</h1>
         <div className={styles.empty}>
           <h3>No Recipes Selected!</h3>
-          <button onClick={() => onAdvance('SelectPage')}>
-            Go to selection!
+          <button>
+            <Link to="/select">Go to selection!</Link>
           </button>
         </div>
       </div>
@@ -81,7 +81,7 @@ const RefinePage: FC<PropsType> = ({
               src={recipeA.imgSrc}
               alt={recipeA.title}
               onClick={() => {
-                onRemove(recipeB.id);
+                dispatch(listActions.remove(recipeB.id));
                 setRecipeB(EMPTY_RECIPE);
               }}
               initial={{ x: -500 }}
@@ -101,7 +101,7 @@ const RefinePage: FC<PropsType> = ({
               src={recipeB.imgSrc}
               alt={recipeB.title}
               onClick={() => {
-                onRemove(recipeA.id);
+                dispatch(listActions.remove(recipeA.id));
                 setRecipeA(EMPTY_RECIPE);
               }}
               initial={{ x: -500 }}

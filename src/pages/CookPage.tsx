@@ -1,19 +1,18 @@
-import { FC, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../hooks/typedReduxHooks';
 
 import Recipe from '../models/recipe';
 
 import styles from './CookPage.module.css';
 import fetchRecipeById from '../utils/fetchRecipebyId';
 
-type PropsType = {
-  selectedId: string;
-  onAdvance: (page: string) => void;
-};
-
 const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
 
-const CookPage: FC<PropsType> = ({ selectedId, onAdvance }) => {
+const CookPage = () => {
   const [recipe, setRecipe] = useState<Recipe>(EMPTY_RECIPE);
+
+  const selectedId = useAppSelector((state) => state.selected);
 
   useEffect(() => {
     if (selectedId) fetchRecipeById(setRecipe, selectedId);
@@ -25,11 +24,11 @@ const CookPage: FC<PropsType> = ({ selectedId, onAdvance }) => {
         <h1>Time to Cook</h1>
         <div className={styles.empty}>
           <h3>No Recipes Selected!</h3>
-          <button onClick={() => onAdvance('SelectPage')}>
-            Go to selection!
+          <button>
+            <Link to="/select">Go to selection!</Link>
           </button>
-          <button onClick={() => onAdvance('ListPage')}>
-            Go to your List!
+          <button>
+            <Link to="/list">Go to your List!</Link>
           </button>
         </div>
       </div>

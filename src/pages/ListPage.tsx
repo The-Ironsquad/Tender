@@ -1,4 +1,7 @@
-import { FC } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { listActions } from '../store';
+import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
 
 import styles from './ListPage.module.css';
 
@@ -9,27 +12,20 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
-type PropsType = {
-  selectedList: string[][];
-  onRemove: (id: string) => void;
-  onSelect: (id: string) => void;
-  onAdvance: (page: string) => void;
-};
+const ListPage = () => {
+  const dispatch = useAppDispatch();
+  const selectedList = useAppSelector((state) => state.acceptedList);
 
-const ListPage: FC<PropsType> = ({
-  selectedList,
-  onRemove,
-  onSelect,
-  onAdvance,
-}) => {
+  const navigate = useNavigate();
+
   if (selectedList.length === 0) {
     return (
       <div className={styles['list-page']}>
         <h1>Your List</h1>
         <div className={styles.empty}>
           <h3>No Recipes Selected!</h3>
-          <button onClick={() => onAdvance('SelectPage')}>
-            Go to selection!
+          <button>
+            <Link to="/select">Go to selection!</Link>
           </button>
         </div>
       </div>
@@ -55,13 +51,16 @@ const ListPage: FC<PropsType> = ({
                     icon={faCircleXmark}
                     style={{ color: 'red' }}
                     size="xl"
-                    onClick={onRemove.bind(null, id)}
+                    onClick={() => dispatch(listActions.remove(id))}
                   />
                   <FontAwesomeIcon
                     icon={faCircleCheck}
                     style={{ color: 'green' }}
                     size="xl"
-                    onClick={onSelect.bind(null, id)}
+                    onClick={() => {
+                      dispatch(listActions.select(id));
+                      navigate('/cook');
+                    }}
                   />
                 </div>
               </motion.li>
@@ -71,11 +70,11 @@ const ListPage: FC<PropsType> = ({
       </ul>
       <h3>Still undecided?</h3>
       <div className={styles.navigate}>
-        <button onClick={() => onAdvance('RefinePage')}>
-          Refine your selection!
+        <button>
+          <Link to="/refine">Refine your selection!</Link>
         </button>
-        <button onClick={() => onAdvance('SelectPage')}>
-          Back to selection!
+        <button>
+          <Link to="/select">Back to selection!</Link>
         </button>
       </div>
     </div>

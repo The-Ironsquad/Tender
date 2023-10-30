@@ -28,6 +28,6 @@
   color: var(--light);
 }
 
-li.selected {
+.list .selected {
   color: var(--light-gray);
 }

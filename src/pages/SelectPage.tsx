@@ -1,4 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
+import { listActions } from '../store';
 
 import Recipe from '../models/recipe';
 import fetchRandomRecipe from '../utils/fetchRandomRecipe';
@@ -15,22 +19,13 @@ import styles from './SelectPage.module.css';
 
 const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
 
-type PropsType = {
-  rejectedList: string[];
-  onAccept: (id: string, title: string) => void;
-  onReject: (id: string) => void;
-  onAdvance: (page: string) => void;
-};
-
-const SelectPage: FC<PropsType> = ({
-  onAccept,
-  onReject,
-  rejectedList,
-  onAdvance,
-}) => {
+const SelectPage = () => {
   const [recipe, setRecipe] = useState<Recipe>(EMPTY_RECIPE);
   const [showRecipe, setShowRecipe] = useState(false);
   const [swipeRight, setSwipeRight] = useState(true);
+
+  const dispatch = useAppDispatch();
+  const rejectedList = useAppSelector((state) => state.rejectedList);
 
   useEffect(() => {
     fetchRandomRecipe(setRecipe, rejectedList);
@@ -39,7 +34,7 @@ const SelectPage: FC<PropsType> = ({
 
   const acceptHandler = () => {
     setSwipeRight(true);
-    onAccept(recipe.id, recipe.title);
+    dispatch(listActions.accept([recipe.id, recipe.title]));
     setTimeout(() => {
       setShowRecipe(false);
       fetchRandomRecipe(setRecipe, rejectedList);
@@ -51,7 +46,7 @@ const SelectPage: FC<PropsType> = ({
 
   const rejectHandler = () => {
     setSwipeRight(false);
-    onReject(recipe.id);
+    dispatch(listActions.reject(recipe.id));
     setTimeout(() => {
       setShowRecipe(false);
       fetchRandomRecipe(setRecipe, rejectedList);
@@ -93,12 +88,8 @@ const SelectPage: FC<PropsType> = ({
           onClick={acceptHandler}
         />
       </div>
-      <button
-        onClick={() => {
-          onAdvance('ListPage');
-        }}
-      >
-        See Your Selection
+      <button>
+        <Link to="/list">See Your Selection</Link>
       </button>
     </div>
   );
