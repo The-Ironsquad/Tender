@@ -20,19 +20,44 @@ const Navbar: FC<PropsType> = ({ onClose }) => {
       >
         <ul className={styles.list}>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? styles.selected : '')}
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/select">Select</NavLink>
+            <NavLink
+              to="/select"
+              className={({ isActive }) => (isActive ? styles.selected : '')}
+            >
+              Select
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/list">Your List</NavLink>
+            <NavLink
+              to="/list"
+              className={({ isActive }) => (isActive ? styles.selected : '')}
+            >
+              Your List
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/refine">Refine</NavLink>
+            <NavLink
+              to="/refine"
+              className={({ isActive }) => (isActive ? styles.selected : '')}
+            >
+              Refine
+            </NavLink>
           </li>
           <li>
-            <NavLink to="cook">Cook</NavLink>
+            <NavLink
+              to="cook"
+              className={({ isActive }) => (isActive ? styles.selected : '')}
+            >
+              Cook
+            </NavLink>
           </li>
         </ul>
       </motion.nav>
