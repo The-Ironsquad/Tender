@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+type CategoriyInput = {
+  name: string;
+  checked: boolean;
+};
+
 const fetchCategories = async (
-  setCategories: (categories: string[]) => void
+  setCategories: (categories: CategoriyInput[]) => void
 ) => {
   try {
     const { data } = await axios.get(
@@ -9,7 +14,10 @@ const fetchCategories = async (
     );
     const { categories } = data;
     setCategories(
-      categories.map((category: Record<string, string>) => category.strCategory)
+      categories.map((category: Record<string, string>) => ({
+        name: category.strCategory,
+        checked: false,
+      }))
     );
   } catch (error) {
     console.log(error);

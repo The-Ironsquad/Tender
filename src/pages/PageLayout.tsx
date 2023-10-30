@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import store from '../store';
@@ -13,6 +13,12 @@ import { AnimatePresence } from 'framer-motion';
 
 const PageLayout = () => {
   const [showNav, setShowNav] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setShowNav(false);
+  }, [location]);
 
   return (
     <Provider store={store}>

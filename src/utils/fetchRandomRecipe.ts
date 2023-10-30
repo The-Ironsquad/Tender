@@ -3,7 +3,8 @@ import Recipe from '../models/recipe';
 
 const fetchRandomRecipe = async (
   recipeSave: (recipe: Recipe) => void,
-  avoidList: string[]
+  avoidList: string[],
+  categories: string[]
 ) => {
   try {
     let meal: Record<string, string>;
@@ -12,7 +13,10 @@ const fetchRandomRecipe = async (
         'https://www.themealdb.com/api/json/v1/1/random.php'
       );
       [meal] = data.meals;
-    } while (avoidList.includes(meal.idMeal));
+    } while (
+      avoidList.includes(meal.idMeal) ||
+      !categories.includes(meal.strCategory)
+    );
 
     const ingredients = Object.keys(meal)
       .filter((key) => key.match('strIngredient*') && meal[key] !== '')
