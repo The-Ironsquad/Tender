@@ -29,6 +29,7 @@ const SelectPage = () => {
   const categories = useAppSelector((state) => state.selectedCategories);
 
   useEffect(() => {
+    if (categories.length === 0) return;
     fetchRandomRecipe(setRecipe, rejectedList, categories);
     setShowRecipe(true);
   }, [rejectedList, categories]);
@@ -57,6 +58,19 @@ const SelectPage = () => {
     }, 100);
   };
 
+  if (categories.length === 0) {
+    return (
+      <div className={styles['select-page']}>
+        <h1>Select</h1>
+        <div className={styles['no-categories']}>
+          <h3>No categories have been selected</h3>
+          <button>
+            <Link to="/">Select some Categories</Link>
+          </button>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={styles['select-page']}>
       <h1>Select</h1>

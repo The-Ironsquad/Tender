@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
 import { listActions } from '../store';
 
 import fetchCategories from '../utils/fetchCategories';
-import logo from '../../public/Logo.svg';
+import logo from '/Logo.svg';
 
 import styles from './HomePage.module.css';
 
