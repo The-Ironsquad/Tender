@@ -2,8 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 30px;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.home-page img {
+  height: 200px;
+  filter: invert(18%) sepia(11%) saturate(3264%) hue-rotate(89deg) brightness(94%) contrast(81%);
 }
 
 .title {

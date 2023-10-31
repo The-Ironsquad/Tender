@@ -1,7 +1,10 @@
 # Tender App
 
-<!--- put the new Tender Logo --->
-<!---![Tender Logo](link_to_logo.png) --->
+<div style="display: flex; justify-content: center">
+  <img src="./public/Logo.svg"
+     alt="Tender app logo"
+     style="height: 300px; margin: auto; filter: invert(100%) sepia(0%) saturate(7442%) hue-rotate(56deg) brightness(115%) contrast(109%);" />
+</div>
 
 Never know what to cook? The Tender App can help you pick something to eat in a fast and fun way. All you have to do is set your requirements such as time and ingredients, and then just swipe the many suggestions the app will give you. Once you've selected a few options, the app will help pick your favorite from the ones you selected. You will have your meal set up before you realize it.
 
