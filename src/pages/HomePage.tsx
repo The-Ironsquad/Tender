@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
 import { listActions } from '../store';
 
 import fetchCategories from '../utils/fetchCategories';
+import logo from '../../public/Logo.svg';
 
 import styles from './HomePage.module.css';
 
@@ -71,7 +72,7 @@ const HomePage = () => {
 
   return (
     <div className={styles['home-page']}>
-      <h1 className={styles.title}>Tender</h1>
+      <img src={logo} alt="tender-logo" />
       <h2>Your next recipe is just a moment away!</h2>
       <h3>What kind of food do you want to cook?</h3>
       <fieldset className={styles.fieldset}>
