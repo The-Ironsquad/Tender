@@ -1,0 +1,71 @@
+.cook-page {
+  margin: 15px 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.cook-page img {
+  height: 250px;
+  width: 90vw;
+  object-fit: cover;
+  margin: 15px auto;
+  flex-grow: 2;
+  box-shadow: 0 5px 10px 5px var(--light-gray);
+}
+
+.ingredients {
+  width: 80vw;
+  margin: 10px auto;
+}
+
+.ingredients h3 {
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.ingredients li {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.ingredients li :first-child {
+  flex: 1;
+  text-align: end;
+}
+
+.ingredients li :last-child {
+  flex: 1;
+  text-align: start;
+}
+
+.instructions {
+  width: 80vw;
+  margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cook-page button {
+  flex: 1;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: var(--light);
+  font-size: inherit;
+  padding: 10px 20px;
+  margin: 10px;
+}
+
+.empty {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cook-page .empty > * {
+  flex: 0
+}

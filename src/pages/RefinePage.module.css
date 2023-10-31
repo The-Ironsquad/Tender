@@ -1,0 +1,45 @@
+.refine-page {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  margin: auto;
+  padding: 0 15px;
+  height: 40%;
+}
+
+.recipe-card img {
+  width: 90%;
+  object-fit: cover;
+  margin: 0 auto 15px;
+  flex: 1;
+  box-shadow: 0 5px 10px 5px var(--light-gray);
+  overflow: hidden;
+}
+
+.empty {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.refine-page .empty > * {
+  flex: 0
+}
+
+.refine-page button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: var(--light);
+  font-size: inherit;
+  padding: 8px 40px;
+  margin: 15px;
+}
