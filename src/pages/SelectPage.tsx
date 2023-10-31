@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/typedReduxHooks';
 import { listActions } from '../store';
 
-import Recipe from '../models/recipe';
-import fetchRandomRecipe from '../utils/fetchRandomRecipe';
+import fetchByCategory from '../utils/fetchByCategory';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -17,56 +16,93 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import styles from './SelectPage.module.css';
 
-const EMPTY_RECIPE = new Recipe('', '', '', {}, ['']);
-
 const SelectPage = () => {
-  const [recipe, setRecipe] = useState<Recipe>(EMPTY_RECIPE);
+  const [recipesAvailable, setRecipesAvailable] = useState<
+    Record<string, string>[]
+  >([]);
+  const [recipe, setRecipe] = useState<Record<string, string>>({});
   const [showRecipe, setShowRecipe] = useState(false);
   const [swipeRight, setSwipeRight] = useState(true);
 
   const dispatch = useAppDispatch();
   const rejectedList = useAppSelector((state) => state.rejectedList);
+  const acceptedList = useAppSelector((state) => state.acceptedList);
   const categories = useAppSelector((state) => state.selectedCategories);
 
   useEffect(() => {
     if (categories.length === 0) return;
-    fetchRandomRecipe(setRecipe, rejectedList, categories);
+    fetchByCategory(setRecipesAvailable, categories);
+  }, [categories]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const avoidList = rejectedList.concat(
+        acceptedList.map((recipe) => recipe[0])
+      );
+      setRecipesAvailable((recipes) =>
+        recipes.filter(
+          (currentRecipe) => !avoidList.includes(currentRecipe.idMeal)
+        )
+      );
+    }, 400);
+  }, [acceptedList, rejectedList]);
+
+  useEffect(() => {
+    if (recipesAvailable.length === 0) return;
+
+    const randomRecipe =
+      recipesAvailable[Math.floor(Math.random() * recipesAvailable.length)];
+
+    setTimeout(() => {
+      setRecipe(randomRecipe);
+    }, 50);
     setShowRecipe(true);
-  }, [rejectedList, categories]);
+  }, [recipesAvailable]);
+
+  const swapRecipes = () => {
+    setTimeout(() => {
+      setShowRecipe(false);
+      setTimeout(() => {
+        setShowRecipe(true);
+      }, 350);
+    }, 50);
+  };
 
   const acceptHandler = () => {
     setSwipeRight(true);
-    dispatch(listActions.accept([recipe.id, recipe.title]));
-    setTimeout(() => {
-      setShowRecipe(false);
-      fetchRandomRecipe(setRecipe, rejectedList, categories);
-      setTimeout(() => {
-        setShowRecipe(true);
-      }, 250);
-    }, 100);
+    dispatch(listActions.accept([recipe.idMeal, recipe.strMeal]));
+    swapRecipes();
   };
 
   const rejectHandler = () => {
     setSwipeRight(false);
-    dispatch(listActions.reject(recipe.id));
-    setTimeout(() => {
-      setShowRecipe(false);
-      fetchRandomRecipe(setRecipe, rejectedList, categories);
-      setTimeout(() => {
-        setShowRecipe(true);
-      }, 250);
-    }, 100);
+    dispatch(listActions.reject(recipe.idMeal));
+    swapRecipes();
   };
 
-  if (categories.length === 0) {
+  if (categories.length === 0 || recipesAvailable.length === 0) {
     return (
       <div className={styles['select-page']}>
         <h1>Select</h1>
         <div className={styles['no-categories']}>
-          <h3>No categories have been selected</h3>
-          <button>
-            <Link to="/">Select some Categories</Link>
-          </button>
+          {categories.length === 0 ? (
+            <>
+              <h3>No categories have been selected</h3>
+              <button>
+                <Link to="/">Select some Categories</Link>
+              </button>
+            </>
+          ) : (
+            <>
+              <h3>No recipes available for your categories selection.</h3>
+              <button>
+                <Link to="/">Select more Categories</Link>
+              </button>
+              <button>
+                <Link to="/list">Go to selected recipes</Link>
+              </button>
+            </>
+          )}
         </div>
       </div>
     );
@@ -78,8 +114,8 @@ const SelectPage = () => {
         <AnimatePresence>
           {showRecipe && (
             <motion.img
-              src={recipe.imgSrc}
-              alt={recipe.title}
+              src={recipe.strMealThumb}
+              alt={recipe.strMeal}
               initial={{ x: swipeRight ? -500 : 500 }}
               animate={{ x: 0 }}
               exit={{ x: swipeRight ? 500 : -500 }}
@@ -88,7 +124,7 @@ const SelectPage = () => {
           )}
         </AnimatePresence>
       </div>
-      <h3>{recipe.title}</h3>
+      <h3>{recipe.strMeal}</h3>
       <div className={styles.action}>
         <FontAwesomeIcon
           icon={faCircleXmark}
